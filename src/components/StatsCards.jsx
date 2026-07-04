@@ -1,10 +1,10 @@
 import { FiBook, FiClipboard, FiStar, FiBarChart2 } from "react-icons/fi";
 
 const statIcons = {
-  courses: <FiBook className="h-6 w-6" />,
-  projects: <FiClipboard className="h-6 w-6" />,
-  points: <FiStar className="h-6 w-6" />,
-  progress: <FiBarChart2 className="h-6 w-6" />,
+  courses: <FiBook className="h-8 w-8" />,
+  projects: <FiClipboard className="h-8 w-8" />,
+  points: <FiStar className="h-8 w-8" />,
+  progress: <FiBarChart2 className="h-8 w-8" />,
 };
 
 const colorClasses = {
@@ -42,25 +42,25 @@ const arrowDown = (
 
 function StatsCards({ stats }) {
   return (
-    <section className="mb-6 grid grid-cols-4 gap-5 max-xl:grid-cols-2 max-sm:grid-cols-2">
+    <section className="mb-6 grid grid-cols-6  gap-5 max-xl:grid-cols-2 max-sm:grid-cols-2">
       {stats.map((stat) => {
         const isUp =
           Number(String(stat.delta || 0).replace(/[^0-9\-\.]/g, "")) >= 0;
         return (
           <article
             key={stat.id}
-            className="flex flex-col items-center gap-3 rounded-[14px] border border-slate-200 bg-white px-6 py-6 text-center shadow-sm"
+            className="flex flex-col items-center gap-3 rounded-[14px] border border-slate-200 bg-white p-10 text-center shadow-sm"
           >
             <span
-              className={`mb-1 inline-flex h-12 w-12 items-center justify-center rounded-full ${colorClasses[stat.color]}`}
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-full ${colorClasses[stat.color]}`}
             >
               {statIcons[stat.icon]}
             </span>
-            <p className="mb-0.5 text-xs text-slate-500">{stat.label}</p>
-            <p className="text-2xl font-bold tracking-tight text-slate-800">
+            <p className="text-sm text-slate-500">{stat.label}</p>
+            <p className="text-3xl font-bold tracking-tight text-slate-800">
               {stat.value}
             </p>
-            <div className="mt-1 flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-1 text-xs">
               <span
                 className={`${isUp ? "text-emerald-500" : "text-red-500"} inline-flex items-center`}
               >
@@ -71,7 +71,7 @@ function StatsCards({ stats }) {
               >
                 {stat.delta}
               </span>
-              <span className="text-xs text-slate-500">
+              <span className="text-[11px] text-slate-400">
                 {stat.deltaLabel || "so với tuần trước"}
               </span>
             </div>

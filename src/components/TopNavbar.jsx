@@ -10,7 +10,7 @@ import {
 } from "react-icons/fi";
 
 function TopNavbar() {
-  const { data, activeTopNav, setActiveTopNav } = useAppContext();
+  const { data, activeTopNav, setActiveTopNav, logout, searchQuery, handleSearch } = useAppContext();
   const [profileOpen, setProfileOpen] = useState(false);
   const [bellOpen, setBellOpen] = useState(false);
   const profileRef = useRef(null);
@@ -75,11 +75,10 @@ function TopNavbar() {
           <button
             key={item}
             type="button"
-            className={`rounded-full px-[18px] py-2 text-sm font-medium transition-all ${
-              activeTopNav === item
+            className={`rounded-full px-[18px] py-2 text-sm font-medium transition-all ${activeTopNav === item
                 ? "bg-violet-600 text-white"
                 : "text-white/75 hover:bg-white/10 hover:text-white"
-            }`}
+              }`}
             onClick={() => setActiveTopNav(item)}
           >
             {item}
@@ -87,7 +86,28 @@ function TopNavbar() {
         ))}
       </nav>
 
-      <div className="relative flex min-w-[140px] items-center justify-end gap-4">
+      <div className="relative flex items-center justify-end gap-4 max-md:w-full">
+        {/* Search Bar */}
+        <div className="relative max-md:w-full">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/40"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input
+            type="search"
+            className="w-36 transition-all duration-300 md:w-48 focus:w-48 focus:md:w-72 rounded-lg border border-white/10 bg-white/10 py-1.5 pl-9 pr-3 text-xs text-white outline-none placeholder:text-white/40 focus:border-violet-500 focus:bg-white/20 focus:ring-2 focus:ring-violet-500/20 max-md:w-full"
+            placeholder="Tìm kiếm..."
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
+          />
+        </div>
+
         <div className="relative" ref={bellRef}>
           <button
             type="button"
@@ -252,7 +272,11 @@ function TopNavbar() {
                 </li>
               </ul>
               <div className="px-4 py-2">
-                <button className="flex w-full items-center gap-3 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600 hover:bg-red-100">
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="flex w-full items-center gap-3 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600 hover:bg-red-100 cursor-pointer"
+                >
                   <span>⎋</span>
                   Đăng xuất
                 </button>
